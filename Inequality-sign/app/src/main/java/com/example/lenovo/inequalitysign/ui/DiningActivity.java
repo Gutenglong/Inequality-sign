@@ -1,6 +1,7 @@
 package com.example.lenovo.inequalitysign.ui;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
@@ -18,6 +19,7 @@ import com.example.lenovo.inequalitysign.Utils.Utils;
 import com.example.lenovo.inequalitysign.adapter.DiningAdapter;
 import com.example.lenovo.inequalitysign.entity.Dining;
 import com.example.lenovo.inequalitysign.http.Httpss;
+import com.example.lenovo.inequalitysign.view.SquareFragment;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -85,11 +87,9 @@ public class DiningActivity extends Activity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.back1:
-                    Intent i = new Intent();
-                    i.setClass(DiningActivity.this,MainActivity.class);
-                    startActivity(i);
+                    finish();
                     break;
-                case R.id.ct:
+                /*case R.id.ct:
                     //展示餐厅列表数据
                     displayDining();
                     lv.setAdapter(adapter);
@@ -98,11 +98,10 @@ public class DiningActivity extends Activity {
                     //展示营业厅列表数据
 
                     displayYyt();
-                    break;
+                    break;*/
             }
         }
     };
-
 
 
     @Override
@@ -167,14 +166,14 @@ public class DiningActivity extends Activity {
 
     private void setOnClick() {
         btn.setOnClickListener(mListener);
-        btn1.setOnClickListener(mListener);
-        btn2.setOnClickListener(mListener);
+       /* btn1.setOnClickListener(mListener);
+        btn2.setOnClickListener(mListener);*/
     }
 
     private void findView() {
-        btn2=(Button)findViewById(R.id.yyt);
+//        btn2=(Button)findViewById(R.id.yyt);
         btn=(Button)findViewById(R.id.back1);
-        btn1 = (Button)findViewById(R.id.ct);
+//        btn1 = (Button)findViewById(R.id.ct);
         lv = (ListView)findViewById(R.id.Lv);
     }
 }
