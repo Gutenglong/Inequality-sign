@@ -11,15 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.CircleOptions;
-import com.baidu.mapapi.map.GroundOverlayOptions;
-import com.baidu.mapapi.map.MapStatusUpdate;
-import com.baidu.mapapi.map.MapStatusUpdateFactory;
-import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.OverlayOptions;
-import com.baidu.mapapi.map.Stroke;
 import com.baidu.mapapi.map.SupportMapFragment;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.model.LatLngBounds;
@@ -215,12 +206,12 @@ public class PoiSearch extends FragmentActivity implements
             overlay.zoomToSpan();
 
             switch( searchType ) {
-                case 2:
-                    showNearbyArea(center, radius);
-                    break;
-                case 3:
-                    showBound(searchbound);
-                    break;
+//                case 2:
+//                    showNearbyArea(center, radius);
+//                    break;
+//                case 3:
+//                    showBound(searchbound);
+//                    break;
                 default:
                     break;
             }
@@ -297,39 +288,39 @@ public class PoiSearch extends FragmentActivity implements
         }
     }
 
-    /**
-     * 对周边检索的范围进行绘制
-     * @param center
-     * @param radius
-     */
-    public void showNearbyArea(LatLng center, int radius) {
-        BitmapDescriptor centerBitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_geo);
-        MarkerOptions ooMarker = new MarkerOptions().position(center).icon(centerBitmap);
-        mBaiduMap.addOverlay(ooMarker);
-
-        OverlayOptions ooCircle = new CircleOptions().fillColor( 0xCCCCCC00 )
-                .center(center).stroke(new Stroke(5, 0xFFFF00FF ))
-                .radius(radius);
-        mBaiduMap.addOverlay(ooCircle);
-    }
-
-    /**
-     * 对区域检索的范围进行绘制
-     * @param bounds
-     */
-    public void showBound( LatLngBounds bounds) {
-        BitmapDescriptor bdGround = BitmapDescriptorFactory
-                .fromResource(R.drawable.ground_overlay);
-
-        OverlayOptions ooGround = new GroundOverlayOptions()
-                .positionFromBounds(bounds).image(bdGround).transparency(0.8f);
-        mBaiduMap.addOverlay(ooGround);
-
-        MapStatusUpdate u = MapStatusUpdateFactory
-                .newLatLng(bounds.getCenter());
-        mBaiduMap.setMapStatus(u);
-
-        bdGround.recycle();
-    }
+//    /**
+//     * 对周边检索的范围进行绘制
+//     * @param center
+//     * @param radius
+//     */
+//    public void showNearbyArea(LatLng center, int radius) {
+//        BitmapDescriptor centerBitmap = BitmapDescriptorFactory
+//                .fromResource(R.drawable.icon_geo);
+//        MarkerOptions ooMarker = new MarkerOptions().position(center).icon(centerBitmap);
+//        mBaiduMap.addOverlay(ooMarker);
+//
+//        OverlayOptions ooCircle = new CircleOptions().fillColor( 0xCCCCCC00 )
+//                .center(center).stroke(new Stroke(5, 0xFFFF00FF ))
+//                .radius(radius);
+//        mBaiduMap.addOverlay(ooCircle);
+//    }
+//
+//    /**
+//     * 对区域检索的范围进行绘制
+//     * @param bounds
+//     */
+//    public void showBound( LatLngBounds bounds) {
+//        BitmapDescriptor bdGround = BitmapDescriptorFactory
+//                .fromResource(R.drawable.ground_overlay);
+//
+//        OverlayOptions ooGround = new GroundOverlayOptions()
+//                .positionFromBounds(bounds).image(bdGround).transparency(0.8f);
+//        mBaiduMap.addOverlay(ooGround);
+//
+//        MapStatusUpdate u = MapStatusUpdateFactory
+//                .newLatLng(bounds.getCenter());
+//        mBaiduMap.setMapStatus(u);
+//
+//        bdGround.recycle();
+//    }
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -36,6 +37,7 @@ import com.example.lenovo.inequalitysign.search.PoiSearch;
 public class NearbyFragment extends Fragment  {
     private View view;
     private Button Btn;
+    private ImageView Login;
 
 //    private List<Nearby> friends = new ArrayList<Nearby>();
 //    private Nearby myadapter;
@@ -58,8 +60,8 @@ public class NearbyFragment extends Fragment  {
     /* 是否是第一次定位 */
     private volatile boolean isFristLocation = true;
     /* 最新一次的经纬度*/
-    private double mCurrentLantitude;
-    private double mCurrentLongitude;
+    public double mCurrentLantitude;
+    public double mCurrentLongitude;
     /* 周边雷达管理器 */
     private RadarSearchManager mRadarSearchManager = null;
     /* 定位的监听器 */
@@ -78,7 +80,7 @@ public class NearbyFragment extends Fragment  {
 
         initBaiduMap();
         initLocation();
-        center2MyLoc();
+//        center2MyLoc();
         getViews();
         myListener();
 
@@ -214,6 +216,7 @@ public class NearbyFragment extends Fragment  {
     //-----------------------------------------POI检索--------------------------------------------//
     private void getViews(){
         Btn = (Button)view.findViewById(R.id.btn);
+        Login =(ImageView)view.findViewById(R.id.img_jia);
     }
     //定义构造方法
     private void myListener() {
@@ -227,6 +230,12 @@ public class NearbyFragment extends Fragment  {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), PoiSearch.class);
                 startActivity(intent);
+            }
+        });
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                center2MyLoc();
             }
         });
     }
@@ -269,7 +278,7 @@ public class NearbyFragment extends Fragment  {
         //移除监听
 //        mRadarSearchManager.removeNearbyInfoListener(mRadarSerchListener);
         //释放资源
-        mRadarSearchManager.destroy();
+//        mRadarSearchManager.destroy();
         mRadarSearchManager = null;
         super.onDestroy();
         // 在 activity 执行 onDestroy时执行mMapView.onDestroy() ，实现地图生命周期管理
