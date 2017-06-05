@@ -345,7 +345,6 @@ public class HomeFragment extends Fragment {
                 Httpss http = new Httpss();
                 NameValuePair pair = new BasicNameValuePair("city",Utils.city);
                 String s = http.setAndGet(u,pair);
-
                 ls = http.parser(s);
                 Message msg = new Message();
                 mHandler.sendMessage(msg);

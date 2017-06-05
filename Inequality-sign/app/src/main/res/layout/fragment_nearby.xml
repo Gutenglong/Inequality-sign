@@ -26,11 +26,12 @@
             android:layout_height="35dp"
             android:layout_weight="1"
             android:background="#09c9f9"
-            android:text="切换"
+            android:text="索引"
             android:textColor="#fff"
             android:textSize="17sp"
             android:id="@+id/btn" />
     </LinearLayout>
+
     <!-- TODO: Update blank fragment layout -->
     <com.baidu.mapapi.map.TextureMapView
         android:id="@+id/bmapView"

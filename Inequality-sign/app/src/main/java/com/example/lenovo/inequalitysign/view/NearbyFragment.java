@@ -1,12 +1,13 @@
 package com.example.lenovo.inequalitysign.view;
 
-
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -20,22 +21,28 @@ import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.Marker;
-import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.map.UiSettings;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.radar.RadarSearchManager;
 import com.example.lenovo.inequalitysign.R;
+import com.example.lenovo.inequalitysign.search.PoiSearch;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NearbyFragment extends Fragment  {
     private View view;
-    private  TextureMapView mMapView = null;
+    private Button Btn;
+
+//    private List<Nearby> friends = new ArrayList<Nearby>();
+//    private Nearby myadapter;
+//    private ListView lv;
+
+
+    private TextureMapView mMapView = null;
     // 百度地图 UI 控制器
     private UiSettings mUiSettings = null;
 
@@ -68,12 +75,16 @@ public class NearbyFragment extends Fragment  {
 
         SDKInitializer.initialize(getActivity().getApplicationContext());
         view = inflater.inflate(R.layout.fragment_nearby, container, false);
+
         initBaiduMap();
         initLocation();
         center2MyLoc();
+        getViews();
+        myListener();
 
         return view;
     }
+
 
 //    @Override
 //    public void onActivityCreated(Bundle savedInstanceState) {
@@ -158,7 +169,7 @@ public class NearbyFragment extends Fragment  {
     }
 
 
-    public class MyLocationListener implements BDLocationListener {
+    public class MyLocationListener implements BDLocationListener{
         @Override
         public void onReceiveLocation(BDLocation location) {
             //mapView销毁后不再处理新接收的位置
@@ -197,37 +208,83 @@ public class NearbyFragment extends Fragment  {
         //设置当前定位位置为BaiduMap的中心点，并移动到定位位置
         MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
         mBaiduMap.animateMapStatus(u);
-        addMarker();
-    }
-    private void addMarker(){
-        // 定义Maker坐标点
-        LatLng point = new LatLng(mCurrentLantitude, mCurrentLongitude);//114.527956,38.001957
-        // 构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.marker);
-        // 构建MarkerOption，用于在地图上添加
-        OverlayOptions option = new MarkerOptions()
-                .position(point)// 设置marker的位置
-                .title("石狮子")//title
-                .draggable(true)//准许拖拽
-                .icon(bitmap);// 必须设置marker图标
-        // 在地图上添加Marker，并显示
-        Marker marker = (Marker)mBaiduMap.addOverlay(option);
     }
 
+
+    //-----------------------------------------POI检索--------------------------------------------//
+    private void getViews(){
+        Btn = (Button)view.findViewById(R.id.btn);
+    }
+    //定义构造方法
+    private void myListener() {
+        // TODO Auto-generated method stub
+        Btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+//                Log.i("定义构造方法", "点击事件");
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), PoiSearch.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    //-----------------------------------------POI检索--------------------------------------------//
+//    @Override
+//    public void onDestroy(){
+//        super.onDestroy();
+//        mMapView.onDestroy();
+//    }
+//    @Override
+//    public void onResume(){
+//        super.onResume();
+//        mMapView.onResume();
+//    }
+//    @Override
+//    public void onPause(){
+//        super.onPause();
+//        mMapView.onPause();
+//    }
     @Override
-    public void onDestroy(){
+    public void onStart() {
+        // 开启图层定位
+        mBaiduMap.setMyLocationEnabled(true);
+        if (!mLocationClient.isStarted()) {
+            mLocationClient.start();
+        }
+        super.onStart();
+    }
+    @Override
+    public void onStop() {
+        // 关闭图层定位
+        mBaiduMap.setMyLocationEnabled(false);
+        mLocationClient.stop();
+        super.onStop();
+    }
+    @Override
+    public void onDestroy() {
+        //移除监听
+//        mRadarSearchManager.removeNearbyInfoListener(mRadarSerchListener);
+        //释放资源
+        mRadarSearchManager.destroy();
+        mRadarSearchManager = null;
         super.onDestroy();
+        // 在 activity 执行 onDestroy时执行mMapView.onDestroy() ，实现地图生命周期管理
         mMapView.onDestroy();
     }
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
+        // 在 activity 执行 onResume 时执行 mMapView. onResume ()， 实现地图生命周期管理
         mMapView.onResume();
     }
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
+        // 在 activity 执行 onPause 时执行 mMapView. onPause ()， 实现地图生命周期管理
         mMapView.onPause();
     }
 
