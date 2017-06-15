@@ -39,10 +39,6 @@ public class NearbyFragment extends Fragment  {
     private Button Btn;
     private ImageView Login;
 
-//    private List<Nearby> friends = new ArrayList<Nearby>();
-//    private Nearby myadapter;
-//    private ListView lv;
-
 
     private TextureMapView mMapView = null;
     // 百度地图 UI 控制器
@@ -67,7 +63,6 @@ public class NearbyFragment extends Fragment  {
     /* 定位的监听器 */
     public MyLocationListener mMyLocationListener = null;
     /* 周边雷达的监听器 */
-//    MyRadarSearchListener mRadarSerchListener = null;
     private String mUserID = "蝙蝠侠";
 
 
@@ -86,15 +81,6 @@ public class NearbyFragment extends Fragment  {
 
         return view;
     }
-
-
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        SDKInitializer.initialize(getActivity().getApplicationContext());
-//        initBaiduMap();
-//
-//    }
 
 
 
@@ -165,9 +151,6 @@ public class NearbyFragment extends Fragment  {
                 true,
                 bitmap);
         mBaiduMap.setMyLocationConfigeration(config);
-//        BitmapDescriptor mCurrentMarker = BitmapDescriptorFactory.fromResource(R.drawable.login);
-//        MyLocationConfiguration config = new MyLocationConfiguration(mCurrentMode,true,mCurrentMarker);
-//        mBaiduMap.setMyLocationConfigeration(config);
     }
 
 
@@ -261,10 +244,7 @@ public class NearbyFragment extends Fragment  {
     }
     @Override
     public void onDestroy() {
-        //移除监听
-//        mRadarSearchManager.removeNearbyInfoListener(mRadarSerchListener);
-        //释放资源
-//        mRadarSearchManager.destroy();
+
         mRadarSearchManager = null;
         super.onDestroy();
         // 在 activity 执行 onDestroy时执行mMapView.onDestroy() ，实现地图生命周期管理
