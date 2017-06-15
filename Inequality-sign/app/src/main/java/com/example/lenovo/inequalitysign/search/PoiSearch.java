@@ -114,7 +114,19 @@ public class PoiSearch extends FragmentActivity implements
             }
         });
 
+//        NearbyFragment parentActivity = (NearbyFragment) getActivity();
+//        parentActivity.center2MyLoc();
+//        NearbyFragment fragment;
+////        NearbyFragment fragment = (NearbyFragment)mFragsList.get(INDEX_EVENTS);
+//        (NearbyFragment)fragment.center2MyLoc();
+
+//        NearbyFragment fragment = new NearbyFragment();
+//        fragment.center2MyLoc();
+//        NearbyFragment ii;
+//        ii = (NearbyFragment) new NearbyFragment();
+//        ii.center2MyLoc();
     }
+
 
     @Override
     protected void onPause() {
@@ -259,7 +271,7 @@ public class PoiSearch extends FragmentActivity implements
     public void onGetSuggestionResult(SuggestionResult res) {
         if (res == null || res.getAllSuggestions() == null) {
             return;
-        }    
+        }
         suggest = new ArrayList<String>();
         for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
             if (info.key != null) {
@@ -323,4 +335,5 @@ public class PoiSearch extends FragmentActivity implements
 //
 //        bdGround.recycle();
 //    }
+
 }

@@ -242,21 +242,7 @@ public class NearbyFragment extends Fragment  {
 
 
     //-----------------------------------------POI检索--------------------------------------------//
-//    @Override
-//    public void onDestroy(){
-//        super.onDestroy();
-//        mMapView.onDestroy();
-//    }
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//        mMapView.onResume();
-//    }
-//    @Override
-//    public void onPause(){
-//        super.onPause();
-//        mMapView.onPause();
-//    }
+
     @Override
     public void onStart() {
         // 开启图层定位
